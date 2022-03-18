@@ -24,7 +24,7 @@ print my $html_template = <<HTML
 </head>
 <body>
     <main>
-        <form action="./cgi-bin/txt_upload.cgi" method="get" enctype="multipart/form-data">
+        <form action="./cgi-bin/txt_upload.pl" method="get" enctype="multipart/form-data">
             <div class="col_upload">
                 <span class="upload"><input type="file" accept=".txt" id="file" name="file">上傳檔案</button></span>
                 <span class="upload__logo"><button type="submit"><img src="./img/upload.webp" width="20px"></button></span>

@@ -1,0 +1,103 @@
+/*全部初始設定*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: normal;
+    color: white;
+
+}
+
+* > button , input {
+    font-size: 15px;
+    height: 4vw;
+    width: 15vw;
+    margin-right: 20px;
+    border-color: rgb(56, 154, 252);
+    border-radius: 20px;
+    background-color: rgb(106, 180, 255);
+}
+
+img {
+    width: 3vw;
+    height: 3vw;
+}
+
+* > h3 {
+    background-color: rgb(106, 180, 255);
+}
+
+body{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 600px;
+}
+
+main > div{
+    justify-content: left;
+    align-items: left;
+    display: inline-block;
+}
+
+.col_upload > span {
+    display: inline-block;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.upload > input{
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.upload__logo > button{
+    cursor: pointer;
+    height: 0vw;
+    width: 0vw;
+    background-color: white;
+    border: 0;
+}
+
+.search__logo > button{
+    cursor: pointer;
+    height: 0vw;
+    width: 0vw;
+    background-color: white;
+    border: 0;
+}
+
+
+.date__logo{
+    cursor: pointer;
+    background-color: white;
+    border: 0;
+}
+
+.col_title {
+    display: flex;
+    color:aqua;
+}
+
+.col_title > span {
+    margin-right: 10px;
+}
+
+.title__No > h3{
+    width: 5vw;
+}
+
+.title__date > h3{
+    width: 20vw;
+}
+
+.title__content > h3{
+    width: 30vw;
+}
+
+.title__move > h3{
+    width: 10vw;
+}
+
+

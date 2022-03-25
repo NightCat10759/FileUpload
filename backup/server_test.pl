@@ -21,31 +21,28 @@ $CGI::POST_MAX = 1024 * 5000;
 my $query = new CGI;
 my $file = new HandleFile();
 
-##
-my ($data, $i, @data, $key, $val, %FORM);
-
-if ($ENV{'REQUEST_METHOD'} eq "GET") {
-$data = $ENV{'QUERY_STRING'};
-} elsif ($ENV{'REQUEST_METHOD'} eq "POST") {
-read(STDIN,$data,$ENV{'CONTENT_LENGTH'});
-}
-##
-
 ###   儲存檔案目錄   ###
 my $upload_dir = "../files";
 
 ###   filename   ###
 my $filename = $query->param("file");
 
+###  limit condition  ###
+if (!$filename)
+{
+    print $query->header();
+    print "There was a problem uploading your photo (try a smaller file).";
+    exit;
+}
 
-###  CGI Get the file  ###
+###  Get the file  ###
 my $upload_filehandle = $query->upload("file");
 
-###  CGI Save the file  ###
+###  Save the file  ###
 open ( UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
 binmode UPLOADFILE;
 
-###  CGI print file  ###
+###  print file  ###
 while ( <$upload_filehandle> )
 {
     print UPLOADFILE;
@@ -63,17 +60,6 @@ close UPLOADFILE;
 ###   test print file   ###
 
 print "Content-type: text/html\n\n";
-print $data;
-
-###  limit condition  ###
-if (!$filename)
-{
-    print $query->header();
-    print "There was a problem uploading your photo (try a smaller file).";
-    exit;
-} else {
-    print "\nGet";
-}
 #$file->readFILE();
 
 

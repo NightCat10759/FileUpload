@@ -37,7 +37,7 @@ sub getFile{
     return $self->{file};
 }
 
-sub writeFILE{
+sub writeFile{
     my ($self, $new_words) = @_;
     $words = $new_words if defined ($new_words);
     #寫入
@@ -47,13 +47,15 @@ sub writeFILE{
     return FILE;
 }
 
-sub readFILE{
+sub readFile{
     # 讀原檔
+    my ($self) = @_;
     if ($self->{file}) {
         open(FILE, $self->{file}) or die "$!";
+        $str = "";
         while( defined( $line = <FILE> )){
             Encode::_utf8_on($line);
-            print ("$line\n");
+             print ("$line\n");
         }
         close(FILE);
     } else {
@@ -61,6 +63,16 @@ sub readFILE{
     }
 }
 
+sub parseFile
+{
+    my ($content);
+    # [maillog][2021-11-23 11:00:00](內容)
+    # 用]把字串拆開
+      @pairs = split(']',$content);
+      print "$content";
+    # 得到[maillog] [2021-11-23 11:00:00] (內容)
+    # 把date跟內容跟檔案名存到資料庫
+}
 
 
 

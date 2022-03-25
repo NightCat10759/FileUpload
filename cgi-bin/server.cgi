@@ -16,6 +16,7 @@ binmode(STDOUT,':encoding(big5)');
 binmode(STDERR,':encoding(big5)');
 
 
+
 ###   Object init   
 my $CGI = CGI->new;
 my $file = new HandleFile();

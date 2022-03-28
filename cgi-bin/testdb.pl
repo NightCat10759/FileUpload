@@ -31,6 +31,6 @@ my $Db = Db->new;
 
 ## 插入資料
 #  datetime,$content,$filename
-$Db->insertDb("2011-10-10"," IA AM CONTENT ","filename.txt");
-$Db->showDb();
-print $CGI->redirect("../index.cgi");
+$Db->insertDb("2022-03-29"," SAVE MY LIFE ","myLord.txt");
+print $Db->showDb();
+#print $CGI->redirect("../index.cgi");

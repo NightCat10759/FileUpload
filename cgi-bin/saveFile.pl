@@ -9,7 +9,7 @@ use utf8;
 use Encode;
 use lib 'lib';
 use HandleFile;
-#use Db; 
+use Db; 
 use File::Spec;
 use strict;
 use CGI;
@@ -21,6 +21,7 @@ binmode(STDOUT,':encoding(big5)');
 binmode(STDERR,':encoding(big5)');
 
 ###   Object init   
+my $Db = Db->new;
 my $CGI = CGI->new;
 my $file = new HandleFile();
 my $filename = '../files/data01.txt';
@@ -40,6 +41,14 @@ my ($datetime,$contents) = $file->parseFile($content);
 
 print "$datetime <br>";
 print "$contents <br>";
+
+my ($trash1,$trash2,$fname) = split('/',$filename,3);
+print "$fname <br>";
+
+## 插入資料
+#  datetime,$content,$filename
+$Db->insertDb($datetime, $contents, $fname);
+
 #readfile
 
 #saveFile to db

@@ -4,12 +4,12 @@
 
 (完成)1. 請提供上傳介面，限制僅能上傳 txt (OK)
 (進行)
-	0000 upload txt && save to dir(暫停) 、 parse txt data (進行)
+	0000 upload txt && save to dir(暫停) 、 parse txt data (OK)
 	2. 由上傳的 txt 中， parse 出有 "[maillog]" 關鍵字的資料列，{}
     	若該列格式為：[maillog][日期時間] 內容，
 
 	
-	0328 parsedata (進行) 、 insert db(OK)
+	0328 parsedata (OK) 、 insert db(OK) 、 parsedata save to db (OK)
 	將資料切為日期時間、內容存到資料表中供查詢
        ex. [maillog][2021-11-23 11:00:00] cheryl login.
 

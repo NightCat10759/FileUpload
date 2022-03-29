@@ -36,14 +36,8 @@ sub showDb{
        }
        my $sth = $dbh->prepare("SELECT * FROM file;");   # 待處理SQL句子q
        $sth->execute();    # 執行SQL
-       ##print
-       while ( my @row = $sth->fetchrow_array() )
-       {
-              print join('\t', @row)."\n";
-       }
 
-       $sth->finish();
-       $dbh->disconnect();  
+       return ($dbh, $sth);  
 }
 sub insertDb{
        my ($self,$datetime,$content,$filename) = @_;
@@ -56,6 +50,11 @@ sub insertDb{
        $dbh->disconnect();
 }
 
+sub searchDb{
+       # 輸入搜尋的內容
+       my ($self,$words) = @_;
+
+}      
 
 
 1;

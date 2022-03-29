@@ -40,10 +40,10 @@ print "                <span class='upload'><input type='file' accept='txt' name
 print "                <span class='upload__logo'><button type='submit'><img src='./img/upload.webp' alt=''></button></span>";
 print "            </div>";
 print "        </form>";
-print "        <form action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
+print "        <form action='./' method='GET' enctype='multipart/form-data'>";
 print "            <div class='col_search'>";
 print "                <span class='keyword'><input type='text' name='keyword' placeholder='關鍵字' /></span>";
-print "                <span class='date'><input type='text' name='date' placeholder='日期' /></span>";
+print "                <span class='date'><input type='datetime-local' name='date' placeholder='日期' /></span>";
 print "                <span class='search__logo'><button type='submit'><img src='./img/search.png' alt=''></i></button></span>";
 print "            </div>";
 print "        </form>";
@@ -62,28 +62,7 @@ print "                     <span class='contents__content'><h3>dasdweijfiohafio
 print "                     <span class='contents__move'><button>修改</button>";
 print "                                                  <button>刪除</button></span>";
 print "                </form>";
-       my ($dbh, $sth) = $db->showDb();
-       ##print
-       #while ( my @row = $sth->fetchrow_array() )
-       #{
-       #       print "<p>" . join('\t', @row) . "</p>";
-       #}
-
-       while(my $ref = $sth->fetchrow_hashref()){
-            my $id = $ref->{id};
-            my $date = $ref->{date};
-            my $content =  $ref->{content};
-            print "                <form class='contents__form' action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
-            print "                     <span class='contents__No'><h3>$id</h3></span>";
-            print "                     <span class='contents__date'><h3>$date</h3></span>";
-            print "                     <span class='contents__content'><h3>$content</h3></span>";
-            print "                     <span class='contents__move'><button>修改</button>";
-            print "                                                  <button>刪除</button></span>";
-            print "                </form>";
-       }
-
-       $sth->finish();
-       $dbh->disconnect();
+            require './cgi-bin/showFile.cgi';
 print "            </div> ";
 print "         </section>";
 print "</div>";

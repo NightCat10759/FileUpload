@@ -13,19 +13,14 @@
 	將資料切為日期時間、內容存到資料表中供查詢
        ex. [maillog][2021-11-23 11:00:00] cheryl login.
 
-	0328 show data front (進行) 、 sort data(by db or backend??) (進行)
+	0329 show data front (OK) 、 sort data(by db or backend??) (OK)
 	(進行)3. 資料列表、預設列出所有資料，依照日期時間降冪排序
 	
-	0000 keyword&date search&show
+	0329 keyword&date search&show (OK)
 	4. 列表提供關鍵字查詢與日期查詢，依照使用者輸入的關鍵字+日期去查詢、列出符合的資料
-	0000 edit data 、 delete data
+
+	0329 edit data (進行)、 delete data (進行)
 	5. 列表每列資料提供內容的編輯以及刪除資料列功能
+
 	0000 search added edit delete data will refresh list not whole page refresh。
 	6. 查詢、新增、編輯、刪除資料後，僅 refresh 列表，不進行整頁重整
-
-
-	作法:
-
-	3.::
-	把files裡面的文件掃描一次，parse完丟到資料庫。
-	在前端show出資料，並照日期排序

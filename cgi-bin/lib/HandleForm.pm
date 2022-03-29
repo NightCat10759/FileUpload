@@ -1,4 +1,4 @@
-#!"C:\xampp\perl\bin\perl.exe"
+package HandleForm;
 # forms-lib.pl
 # Decodes URLs and unpacks from input.
 # Read the form contents into $input, decodes it, unpacks it,
@@ -57,4 +57,4 @@ sub ParseInput
   return (%input);
 }
 
-return true;
+1;

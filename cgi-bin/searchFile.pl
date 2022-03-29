@@ -17,7 +17,7 @@
 use utf8;
 use Encode;
 use lib 'lib';
-require './lib/HandleForm.pl';
+use HandleForm;
 use File::Spec;
 use strict;
 use CGI;
@@ -27,12 +27,17 @@ binmode(STDIN,':encoding(big5)');
 binmode(STDOUT,':encoding(big5)');
 binmode(STDERR,':encoding(big5)');
 
-my %input = &GetFormInput();
+
+my $cgi = CGI->new;
+
+my %input = HandleForm->GetFormInput();
 my $keyword = $input{'keyword'};
 my $date = $input{'date'};
+
 
 print "content-type: text/html\n\n";
 print "keyword = $keyword";
 print "<br />";
 print "date = $date";
+
 

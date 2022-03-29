@@ -28,14 +28,27 @@ sub getDb{
        my ($self) = @_;
        return $self->{db};
 }
-sub showDb{
+sub showDbs{
        my ($self) = @_;
        my $dbh = $self->{db};
        if ( ! $dbh->ping ) {
               $dbh = $dbh->clone() or die "cannot connect to db";
        }
-       my $sth = $dbh->prepare("SELECT * FROM file;");   # 待處理SQL句子q
+       my $sth = $dbh->prepare("SELECT * FROM file ORDER BY date DESC;");   # 待處理SQL句子q
        $sth->execute();    # 執行SQL
+
+       return ($dbh, $sth);  
+}
+
+sub showDb{
+       # 輸入關鍵字跟日期查詢資料
+       my ($self,$date,$keyword) = @_;
+       my $dbh = $self->{db};
+       if ( ! $dbh->ping ) {
+              $dbh = $dbh->clone() or die "cannot connect to db";
+       }
+       my $sth = $dbh->prepare("SELECT * FROM file where date = ? OR content = ? ORDER BY date DESC;");   # 待處理SQL句子q
+       $sth->execute($date,$keyword);    # 執行SQL
 
        return ($dbh, $sth);  
 }

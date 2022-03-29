@@ -121,7 +121,11 @@ section > p{
 
 
 
-.contents__form > span{
+.printout{
+    display: flex;
+}
+
+.printout > span {
     padding-left: 5px;
     color: black;
     margin-right:2px ;
@@ -153,7 +157,7 @@ section > p{
     justify-content: center;
 }
 
-.contents__move > button{
+.contents__but{
     width: 50px;
     height: 30px;
 }

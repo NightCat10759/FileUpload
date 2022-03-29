@@ -55,19 +55,17 @@ print "                <span class='title__move'><h3>動作</h3></span>";
 print "            </div> ";
 print "         <section>";
 print "            <div class='contents'>";
-print "                <form class='contents__form' action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
-print "                     <span class='contents__No'><h3>02</h3></span>";
-print "                     <span class='contents__date'><h3>2011-02-09</h3></span>";
-print "                     <span class='contents__content'><h3>dasdweijfiohafiosa</h3></span>";
-print "                     <span class='contents__move'><button>修改</button>";
-print "                                                  <button>刪除</button></span>";
-print "                </form>";
-            require './cgi-bin/showFile.cgi';
+
+                    
+                    require './cgi-bin/showFile.cgi';
+
+
 print "            </div> ";
 print "         </section>";
 print "</div>";
 print "</body>";
 print "</html>";
+print "<script src='script.js' async='true'></script>";
 
 
 

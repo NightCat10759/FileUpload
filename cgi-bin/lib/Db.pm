@@ -1,7 +1,17 @@
 package Db;
 
-use strict;
+
 use DBI;
+###   使用module、中文處理   ###
+use utf8;
+use Encode;
+use strict;
+use CGI;
+use lib './cgi-bin/lib';
+use Db;
+binmode(STDIN,':encoding(utf8)');
+binmode(STDOUT,':encoding(utf8)');
+binmode(STDERR,':encoding(utf8)');
 
 sub new{
        my $class = shift;
@@ -28,6 +38,7 @@ sub getDb{
        my ($self) = @_;
        return $self->{db};
 }
+
 sub showDbs{
        my ($self) = @_;
        my $dbh = $self->{db};
@@ -52,6 +63,7 @@ sub showDb{
 
        return ($dbh, $sth);  
 }
+
 sub insertDb{
        my ($self,$datetime,$content,$filename) = @_;
        my $dbh = $self->{db};
@@ -63,11 +75,16 @@ sub insertDb{
        $dbh->disconnect();
 }
 
-sub searchDb{
-       # 輸入搜尋的內容
-       my ($self,$words) = @_;
+sub editDb{}
 
-}      
+sub deleteDb{
+       my ($self, $id) = @_;
+       my $dbh = $self->{db};
+       my $sth = $dbh->prepare("delete from file where id = ?");   # 待處理SQL句子q
+       $sth->execute($id);    # 執行SQL
+       $sth->finish();
+       $dbh->disconnect();
+}
 
 
 1;

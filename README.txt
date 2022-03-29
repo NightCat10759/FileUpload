@@ -19,8 +19,8 @@
 	0329 keyword&date search&show (OK)
 	4. 列表提供關鍵字查詢與日期查詢，依照使用者輸入的關鍵字+日期去查詢、列出符合的資料
 
-	0329 edit data (進行)、 delete data (進行)
+	0329 edit data (進行)、 delete data (OK)
 	5. 列表每列資料提供內容的編輯以及刪除資料列功能
 
-	0000 search added edit delete data will refresh list not whole page refresh。
+	0000 AJAX。(待辦)
 	6. 查詢、新增、編輯、刪除資料後，僅 refresh 列表，不進行整頁重整

@@ -12,9 +12,9 @@ use strict;
 use CGI;
 use CGI::Carp qw( fatalsToBrowser );
 use File::basename;
-binmode(STDIN,':encoding(big5)');
-binmode(STDOUT,':encoding(big5)');
-binmode(STDERR,':encoding(big5)');
+binmode(STDIN,':encoding(utf8))');
+binmode(STDOUT,':encoding(utf8)');
+binmode(STDERR,':encoding(utf8)');
 
 ### 顯示test資料
 my $CGI = CGI->new;
@@ -31,6 +31,6 @@ my $Db = Db->new;
 
 ## 插入資料
 #  datetime,$content,$filename
-$Db->insertDb("2022-03-29"," SAVE MY LIFE ","myLord.txt");
+$Db->insertDb("2022-03-29"," 是小龜唷! ","龜.txt");
 print $Db->showDb();
 print $CGI->redirect("../index.cgi");

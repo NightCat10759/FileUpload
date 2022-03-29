@@ -33,4 +33,4 @@ my $Db = Db->new;
 #  datetime,$content,$filename
 $Db->insertDb("2022-03-29"," SAVE MY LIFE ","myLord.txt");
 print $Db->showDb();
-#print $CGI->redirect("../index.cgi");
+print $CGI->redirect("../index.cgi");

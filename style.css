@@ -26,9 +26,6 @@ img {
     height: 3vw;
 }
 
-* > h3 {
-    background-color: rgb(106, 180, 255);
-}
 
 body{
     justify-content: center;
@@ -36,7 +33,11 @@ body{
     display: flex;
     margin: 0;
     padding: 0;
-    height: 600px;
+}
+
+main{
+    margin: 0%;
+    padding: 0%;
 }
 
 main > div{
@@ -85,7 +86,12 @@ main > div{
 }
 
 .col_title > span {
-    margin-right: 10px;
+    background-color: rgb(106, 180, 255);
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+    margin-right: 2px;
+    line-height: 0%;
 }
 
 .title__No > h3{
@@ -101,9 +107,53 @@ main > div{
 }
 
 .title__move > h3{
-    width: 10vw;
+    width: 6vw;
 }
 
 section > p{
     color: black;
+}
+
+.contents__form{
+    color: black;
+    display: flex;
+}
+
+
+
+.contents__form > span{
+    padding-left: 5px;
+    color: black;
+    margin-right:2px ;
+    background-color: rgba(0, 132, 255, 0.322);
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.contents__No > h3{
+    width: 5vw;
+    color: black;
+}
+
+.contents__date> h3{
+    width: 20vw;
+    color: black;
+}
+
+.contents__content> h3{
+    width: 30vw;
+    color: black;
+}
+
+.contents__move {
+    width: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contents__move > button{
+    width: 50px;
+    height: 30px;
 }

@@ -23,7 +23,7 @@ print "<head>";
 print "    <meta charset='UTF-8'>";
 print "    <meta http-equiv='X-UA-Compatible' content='IE=edge'>";
 print "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-print "    <link rel='stylesheet' href='style.css?v=<?=time(2)?>'>";
+print "    <link rel='stylesheet' href='style.css?v=<?=time()?>'>";
 print "    <title>file_upload</title>";
 print "</head>";
 print "<body>";
@@ -54,15 +54,37 @@ print "                <span class='title__content'><h3>內容</h3></span>";
 print "                <span class='title__move'><h3>動作</h3></span>";
 print "            </div> ";
 print "         <section>";
+print "            <div class='contents'>";
+print "                <form class='contents__form' action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
+print "                     <span class='contents__No'><h3>02</h3></span>";
+print "                     <span class='contents__date'><h3>2011-02-09</h3></span>";
+print "                     <span class='contents__content'><h3>dasdweijfiohafiosa</h3></span>";
+print "                     <span class='contents__move'><button>修改</button>";
+print "                                                  <button>刪除</button></span>";
+print "                </form>";
        my ($dbh, $sth) = $db->showDb();
        ##print
-       while ( my @row = $sth->fetchrow_array() )
-       {
-              print "<p>" . join('\t', @row) . "</p>";
+       #while ( my @row = $sth->fetchrow_array() )
+       #{
+       #       print "<p>" . join('\t', @row) . "</p>";
+       #}
+
+       while(my $ref = $sth->fetchrow_hashref()){
+            my $id = $ref->{id};
+            my $date = $ref->{date};
+            my $content =  $ref->{content};
+            print "                <form class='contents__form' action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
+            print "                     <span class='contents__No'><h3>$id</h3></span>";
+            print "                     <span class='contents__date'><h3>$date</h3></span>";
+            print "                     <span class='contents__content'><h3>$content</h3></span>";
+            print "                     <span class='contents__move'><button>修改</button>";
+            print "                                                  <button>刪除</button></span>";
+            print "                </form>";
        }
 
        $sth->finish();
        $dbh->disconnect();
+print "            </div> ";
 print "         </section>";
 print "</div>";
 print "</body>";

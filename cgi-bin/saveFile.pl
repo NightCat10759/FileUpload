@@ -27,13 +27,19 @@ my $filename = '../files/data01.txt';
 $file->setFile($filename);
 
 #savefile
+#parse
+#save to db
 print "Content-type: text/html\n\n";
 print "filename = $filename";
 print "<br>";
 my $content = read_file($filename);
-print "$content";
-$file->parseFile($content);
+print "$content <br>";
+# parsefile 傳入txt內容
+# 傳入operation運算子 回傳相對應的內容
+my ($datetime,$contents) = $file->parseFile($content);
 
+print "$datetime <br>";
+print "$contents <br>";
 #readfile
 
 #saveFile to db

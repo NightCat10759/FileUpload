@@ -11,6 +11,7 @@ package HandleFile;
 ### 使用module、中文處理
 use utf8;
 use Encode;
+use strict;
 binmode(STDIN,':encoding(utf8)');
 binmode(STDOUT,':encoding(utf8)');
 binmode(STDERR,':encoding(utf8)');
@@ -18,8 +19,8 @@ binmode(STDERR,':encoding(utf8)');
 
 # 等於constructor
 sub new{
-    $class = shift;
-    $self = {
+    my $class = shift;
+    my $self = {
         file => shift,
     };
     bless $self,$class;
@@ -37,14 +38,14 @@ sub getFile{
     return $self->{file};
 }
 
+
 sub writeFile{
     my ($self, $new_words) = @_;
-    $words = $new_words if defined ($new_words);
+    my $words = $new_words if defined ($new_words);
     #寫入
     open(FILE, '>:encoding(utf8)' ,$self->{file}) or die "$!";
     print FILE $words;
     close(FILE);
-    return FILE;
 }
 
 sub readFile{
@@ -52,8 +53,8 @@ sub readFile{
     my ($self) = @_;
     if ($self->{file}) {
         open(FILE, $self->{file}) or die "$!";
-        $str = "";
-        while( defined( $line = <FILE> )){
+        my $str = "";
+        while( defined( my $line = <FILE> )){
             Encode::_utf8_on($line);
              print ("$line\n");
         }
@@ -65,15 +66,14 @@ sub readFile{
 
 sub parseFile
 {
-    my ($content);
+    my ($self, $content) = @_;
     # [maillog][2021-11-23 11:00:00](內容)
     # 用]把字串拆開
-      @pairs = split(']',$content);
-      print "$content";
+      my ( $key,  $datetime,  $contents) = split(']', $content, 3);
+      $datetime =~ s/\[/ /;
+      return ($datetime , $contents);
     # 得到[maillog] [2021-11-23 11:00:00] (內容)
-    # 把date跟內容跟檔案名存到資料庫
 }
-
 
 
 

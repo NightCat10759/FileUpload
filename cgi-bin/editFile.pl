@@ -31,5 +31,9 @@ if ( %input && (my $id = $input{'delete'}) ) {
 }
 
 if ( %input && (my $id = $input{'edit'}) ){
+# 編輯內容，將輸入內容替換原先內容
+    #(content, id)
+    my $editContent = $input{'editContent'};
+    $db->editDb($editContent, $id);
     print $cgi->redirect('../index.cgi');
 }

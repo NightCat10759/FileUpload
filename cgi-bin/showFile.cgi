@@ -50,13 +50,12 @@ if( my %input = HandleForm->GetFormInput() ){
 
 } else {
 # 頁尾
-     print "  <form class='contents__form' action='./cgi-bin/searchFile.pl' method='GET' enctype='multipart/form-data'>";
-     print "       <span class='contents__No'><h3></h3></span>";
-     print "       <span class='contents__date'><h3></h3></span>";
-     print "       <span class='contents__content'><h3></h3></span>";
-     print "       <span class='contents__move'></span>";
-     print "  </form>";
-
+     print "<div class='printout'>";
+     print "     <span class='contents__No'><h3></h3></span>";
+     print "     <span class='contents__date'><h3></h3></span>";
+     print "     <span class='contents__content'><h3></h3><input class='editInput' type='hidden'/></span>";
+     print "     <span class='contents__move'></span>";
+     print "</div'>";
 }
 
 
@@ -69,16 +68,7 @@ sub getContentId{
           my $content =  $ref->{content};
           # 如果包含關鍵字印出
           if ( $content =~ /$keyword/ ){
-               print "<div class='printout'>";
-               print "<form class='contents__form' action='./cgi-bin/editFile.pl' method='GET' enctype='multipart/form-data'>";
-               print "     <span class='contents__No'><h3>$id</h3></span>";
-               print "     <span class='contents__date'><h3>$date</h3></span>";
-               print "     <span class='contents__content'><h3>$content</h3><input id='editInput' type='hidden'></span>";
-               print "     <span class='contents__move'><button class='contents__but' name='edit' onclick='nohidden()' value='$id'>修改</button>";
-               print "                            <form action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
-               print "                               <button name='delete' value='$id'>刪除</button>";
-               print "                            </form></span>";
-               print "</div>";
+               &printout($id, $date, $content);
           }
      }
 }
@@ -90,14 +80,21 @@ sub getContents{
           my $id = $ref->{id};
           my $date = $ref->{date};
           my $content =  $ref->{content};
-          print "     <div class='printout'>";
-          print "     <span class='contents__No'><h3>$id</h3></span>";
-          print "     <span class='contents__date'><h3>$date</h3></span>";
-          print "     <span class='contents__content'><h3>$content</h3><input id='editInput' type='hidden'></span>";
-          print "     <span class='contents__move'><button class='contents__but' name='edit' onclick='nohidden()' value='$id'>修改</button>";
-          print "                            <form action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
-          print "                               <button class='contents__but' name='delete' value='$id'>刪除</button>";
-          print "                            </form></span>";
-          print "     </div>";
+          &printout($id, $date, $content);
      }
+}
+
+sub printout{
+     my($id, $date, $content) = @_;
+     print "<div class='printout'>";
+     print "<form class='printout' action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
+     print "     <span class='contents__No'><h3>$id</h3></span>";
+     print "     <span class='contents__date'><h3>$date</h3></span>";
+     print "     <span class='contents__content'><input name='editContent' value='$content' /></span>";
+     print "     <span class='contents__move'>";                    
+     print "        <button  class='contents__but' name='edit'  value='$id'>修改</button>";
+     print "        <button  class='contents__but' name='delete' value='$id'>刪除</button>";
+     print "     </span>";
+     print "</form>";
+     print "</div>";
 }

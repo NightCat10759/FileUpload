@@ -23,8 +23,9 @@ print "<head>";
 print "    <meta charset='UTF-8'>";
 print "    <meta http-equiv='X-UA-Compatible' content='IE=edge'>";
 print "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-print "    <link rel='stylesheet' href='style.css?v=<?=time()?>'>";
+print "    <link rel='stylesheet' href='style.css?v=<?=time(2)?>'>";
 print "    <title>file_upload</title>";
+print "    <script src='script.js'></script>";
 print "</head>";
 print "<body>";
 print "    <main>";
@@ -65,7 +66,6 @@ print "         </section>";
 print "</div>";
 print "</body>";
 print "</html>";
-print "<script src='script.js' async='true'></script>";
 
 
 

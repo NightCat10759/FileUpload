@@ -75,7 +75,15 @@ sub insertDb{
        $dbh->disconnect();
 }
 
-sub editDb{}
+sub editDb{
+       my ($self,$content, $id) = @_;
+       my $dbh = $self->{db};
+       my $sth = $dbh->prepare("UPDATE file SET content = ?
+                                where id = ? ;");   # 待處理SQL句子q
+       $sth->execute($content,$id);    # 執行SQL
+       $sth->finish();
+       $dbh->disconnect();  
+}
 
 sub deleteDb{
        my ($self, $id) = @_;

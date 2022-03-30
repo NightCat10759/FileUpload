@@ -144,8 +144,11 @@ section > p{
     color: black;
 }
 
-.contents__content> h3{
-    width: 30vw;
+.contents__content> input{
+    width: 28vw;
+    border-radius: 0;
+    border: none;
+    background-color: rgba(0, 132, 255, 0);
     color: black;
 }
 
@@ -161,3 +164,4 @@ section > p{
     width: 50px;
     height: 30px;
 }
+

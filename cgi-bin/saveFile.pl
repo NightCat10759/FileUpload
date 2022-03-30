@@ -17,6 +17,7 @@ use CGI::Carp qw( fatalsToBrowser );
 use File::basename;
 use File::Slurp;
 use File::Find;
+no warnings 'File::Find';
 binmode(STDIN,':encoding(big5)');
 binmode(STDOUT,':encoding(big5)');
 binmode(STDERR,':encoding(big5)');
@@ -32,7 +33,7 @@ print "Content-type: text/html\n\n";
 print "All files:  ";
 
 # 找資料夾中所有檔案
-my $files = find( \&wanted, "../files");
+my $files = find( { no_chdir => 1,wanted => \&wanted} , "../files");
 sub wanted() {
 
     my ($self) = @_;
@@ -42,32 +43,33 @@ sub wanted() {
     ## Main ##
     my @files = split(" ",$files);
     # 把每個檔案找出
-
+    for(my $i=0; $i <= @files; $i++){
+        &Main($files[$i]);
+    }
 }
 
-#for(my $i=0; $i <= @files; $i++){
-#
-#       print "<br>";
-#       print $files[$i];
-#       $file->setFile($files[$i]);
-#       my $content = $file->readFile();
-#       # parse
-#       my ($key,$datetime,$contents) = $file->parseFile($content);
-#       # 找出有maillog的部分 
-#
-#       if ($file->isformat($key)){
-#
-#           my ($dir1,$dir2,$fname) = split('/',$files[$i],3);
-#           $file->showFile($key, $datetime, $contents, $fname);
-#
-#       } else {
-#
-#           print "incorrect";
-#
-#       }
-#
-#   }
-#
+$file->setFile("../files/data01.txt");
+my $content = $file->readFile();
+print "content:  ".$content;
+
+sub Main{
+    my ($files)= @_;
+    print "<br>";
+    print $files;
+    $file->setFile($files);
+    my $content = $file->readFile();
+    # parse
+    my ($key,$datetime,$contents) = $file->parseFile($content);
+    # 找出有maillog的部分 
+    if ($file->isformat($key)){
+        my ($dir1,$dir2,$fname) = split('/',$files,3);
+        $file->showFile($key, $datetime, $contents, $fname);
+    } else {
+        print "incorrect";
+    }
+ 
+}
+
 
 
 

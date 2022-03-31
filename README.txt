@@ -14,7 +14,7 @@
        ex. [maillog][2021-11-23 11:00:00] cheryl login.
 
 	0329 show data front (OK) 、 sort data(by db or backend??) (OK)
-	(進行)3. 資料列表、預設列出所有資料，依照日期時間降冪排序
+	3. 資料列表、預設列出所有資料，依照日期時間降冪排序
 	
 	0329 keyword&date search&show (OK)
 	4. 列表提供關鍵字查詢與日期查詢，依照使用者輸入的關鍵字+日期去查詢、列出符合的資料

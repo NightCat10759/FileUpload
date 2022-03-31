@@ -40,38 +40,6 @@ while ( <$upload_filehandle> ) {
 
 close UPLOADFILE;
 
-
-###   測試將已儲存資料打開 
-my $os_file = File::Spec->catfile("../files",$filename);
-
-#   set file   
-$file->setFile($os_file);
-
 # redirect
-#print $CGI->redirect("../index.cgi");
-
-###  print file   
-
-print "Content-Type: multipart/form-data\n\n";
-print "filename: $filename"
-print "<br>";
-
-#  limit condition  
-if (!$filename)
-{
-    print "There was a problem uploading your photo (try a smaller file).";
-    print "<br>";
-    exit;
-} else {
-    print "Get";
-    print "<br>";
-}
-print "file content: ";
-print "<br>";
-
-
-
-
-
-
+print $CGI->redirect("../index.cgi");
 

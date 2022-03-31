@@ -24,7 +24,7 @@ my $filename = $query->param("uploadfile");
 if ( !$filename )
 {
 print $query->header ();
-print "There was a problem uploading your photo (try a smaller file).";
+die "There was a problem uploading your file (try a smaller file).";
 exit;
 }
 
@@ -40,6 +40,7 @@ $filename = $1;
 else
 {
 die "Filename contains invalid characters";
+exit;
 }
 
 my $upload_filehandle = $query->upload("uploadfile");
@@ -66,21 +67,17 @@ sub Main{
     my $contents = read_file($files);
     # parse
     my ($key,$datetime,$content) = $handlefile->parseFile($contents);
-    $handlefile->showInfo($key, $datetime, $content, $filename);
+    #$handlefile->showInfo($key, $datetime, $content, $filename);
     # 找出有maillog的部分 
     if ($handlefile->isformat($key)){
         #有就存入db
-        $handlefile->showInfo($key, $datetime, $content, $filename);
+    #    $handlefile->showInfo($key, $datetime, $content, $filename);
         $db->insertDb($datetime,$content,$filename);
     } else {
         #沒有就刪除
-        my ($dir1,$dir2,$fname) = split('/',$handlefile->getFile($files),3);
-        print "<br />incorrect";
-        print "<br />datetime: " . $datetime;
-        print "<br />content: " . $content;
-        print "<br />fname: " . $fname;
-        print "<br />key: " . $key;
-        print "file insert failed";
+    #    print "file insert failed";
+        my $file = $handlefile->getFile($files);
+        $handlefile->deleteFile($file);
     }
  
 }

@@ -50,14 +50,8 @@ if( my %input = HandleForm->GetFormInput() ){
 
 } else {
 # 頁尾
-     print "<div class='printout'>";
-     print "     <span class='contents__No'><h3></h3></span>";
-     print "     <span class='contents__date'><h3></h3></span>";
-     print "     <span class='contents__content'><h3></h3><input class='editInput' type='hidden'/></span>";
-     print "     <span class='contents__move'></span>";
-     print "</div'>";
+     &footer();
 }
-
 
 sub getContentId{
      #get
@@ -86,15 +80,26 @@ sub getContents{
 
 sub printout{
      my($id, $date, $content) = @_;
-     print "<div class='printout'>";
-     print "<form class='printout' action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
+     # 如果內容有特殊字元 做轉換
+     $content =~ s/{ }//;
+     print "<div class='container'>";
+     print "<form class='content__form' action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
      print "     <span class='contents__No'><h3>$id</h3></span>";
      print "     <span class='contents__date'><h3>$date</h3></span>";
-     print "     <span class='contents__content'><input name='editContent' value='$content' /></span>";
+     print "     <span class='contents__content'>";
+     print               $cgi->textfield(-name => 'editContent' ,-default => $content);
+     #<input name='editContent' value='$content' />
+     print "     </span>";
      print "     <span class='contents__move'>";                    
-     print "        <button  class='contents__but' name='edit'  value='$id'>修改</button>";
-     print "        <button  class='contents__but' name='delete' value='$id'>刪除</button>";
+     print "        <button  class='contents__but__edit' name='edit'  value='$id'>修改</button>";
+     print "        <button  class='contents__but__dele' name='delete' value='$id'>刪除</button>";
      print "     </span>";
      print "</form>";
+#     &footer();
      print "</div>";
+}
+
+sub footer{
+     print "<div class='footer'>";
+     print "</div'>";
 }

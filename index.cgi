@@ -24,29 +24,23 @@ print "<head>";
 print "    <meta charset='UTF-8'>";
 print "    <meta http-equiv='Content-Type' content='text/html'>";
 print "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-print "    <link rel='stylesheet' href='style.css?v=<?=time()?>'>";
+print "    <link rel='stylesheet' href='style.css?v=<?=time(1)?>'>";
 print "    <title>file_upload</title>";
 print "    <script src='script.js'></script>";
 print "</head>";
 print "<body>";
 print "    <main>";
-print "        <form action='./cgi-bin/testDb.pl' method='get' enctype='multipart/form-data'>";
-print "            <button type='submit'>testDb</button>";
-print "        </form>";
-print "        <form action='./cgi-bin/saveFile.pl' method='get' enctype='multipart/form-data'>";
-print "            <button type='submit'>SAVE</button>";
-print "        </form>";
 print "        <form action='./cgi-bin/upload.cgi' method='post' enctype='multipart/form-data'>";
 print "            <div class='col_upload'>";
-print "                <span class='upload'><input type='file' accept='.txt' name='uploadfile' /></span>";
-print "                <span class='upload__logo'><button type='submit'><img src='./img/upload.webp' alt=''></button></span>";
+print "                <span class='upload'><input class='upload__input' type='file' accept='.txt' name='uploadfile' /></span>";
+print "                <span class='upload'><button class='upload__but' type='submit'><img src='./img/upload.webp' alt=''></button></span>";
 print "            </div>";
 print "        </form>";
 print "        <form action='./' method='GET' enctype='multipart/form-data'>";
 print "            <div class='col_search'>";
 print "                <span class='keyword'><input type='text' name='keyword' placeholder='關鍵字' /></span>";
-print "                <span class='date'><input type='datetime-local' name='date' placeholder='日期' /></span>";
-print "                <span class='search__logo'><button type='submit'><img src='./img/search.png' alt=''></i></button></span>";
+print "                <span class='date'><input class='date__input' type='datetime-local' name='date' placeholder='日期' /></span>";
+print "                <span class='search'><button class='search__but' type='submit'><img src='./img/search.png' alt=''></i></button></span>";
 print "            </div>";
 print "        </form>";
 print "            <div class='col_title'>";
@@ -59,8 +53,9 @@ print "         <section>";
 print "            <div class='contents'>";
 
                     
-                    require './cgi-bin/showFile.cgi';
+                        require './cgi-bin/showFile.cgi';
 
+print "                 <div class='container'></div>";
 
 print "            </div> ";
 print "         </section>";
@@ -68,6 +63,8 @@ print "</div>";
 print "</body>";
 print "</html>";
 
+#print "<script src='./js/jquery.min.js'></script>";
+#print "<script src='./js/pass-form.js'></script>";
 
 
 

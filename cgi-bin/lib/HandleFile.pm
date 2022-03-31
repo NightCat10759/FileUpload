@@ -71,7 +71,9 @@ sub parseFile
     my ($self, $content) = @_;
     # [maillog][2021-11-23 11:00:00](內容)
     # 用]把字串拆開
-    my ( $key,  $datetime,  $contents) = split(']', $content, 3);
+    # 如果字串有 ] 的話
+    # 如果沒有 跳開
+    my ( $key,  $datetime,  $contents) = split(']', $content, 3) or exit;
     $key =~ s/\[//;
     $datetime =~ s/\[//;
     return ($key,$datetime , $contents);
@@ -99,6 +101,7 @@ sub showInfo{
 
 sub deleteFile{
     my ($self, $filename) = @_;
+    unlink($filename);
 }
 
 1;

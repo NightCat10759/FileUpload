@@ -58,7 +58,7 @@ sub showDb{
        if ( ! $dbh->ping ) {
               $dbh = $dbh->clone() or die "cannot connect to db";
        }
-       my $sth = $dbh->prepare("SELECT * FROM file where date = ? OR content = ? ORDER BY date DESC;");   # 待處理SQL句子q
+       my $sth = $dbh->prepare("SELECT * FROM file where date = ? || content = ? ORDER BY date DESC;");   # 待處理SQL句子q
        $sth->execute($date,$keyword);    # 執行SQL
 
        return ($dbh, $sth);  

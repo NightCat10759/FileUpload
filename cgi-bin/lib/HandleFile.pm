@@ -48,16 +48,18 @@ sub writeFile{
     close(FILE);
 }
 
-sub readFile{
+sub showFile{
     # 讀原檔
     my ($self) = @_;
     if ($self->{file}) {
         open(FILE,$self->{file}) or die "$!";
         my $str = "";
+        print "<br />";
         while( defined( my $line = <FILE> )){
             Encode::_utf8_on($line);
-             print ("$line\n");
+            print ("$line\n");
         }
+        print "<br />";
         close(FILE);
     } else {
         print "No such FILE";
@@ -69,8 +71,10 @@ sub parseFile
     my ($self, $content) = @_;
     # [maillog][2021-11-23 11:00:00](內容)
     # 用]把字串拆開
-      my ( $key,  $datetime,  $contents) = split(']', $content, 3);
-        return ($key,$datetime , $contents);
+    my ( $key,  $datetime,  $contents) = split(']', $content, 3);
+    $key =~ s/\[//;
+    $datetime =~ s/\[//;
+    return ($key,$datetime , $contents);
     # 得到[maillog] [2021-11-23 11:00:00] (內容)
 }
 
@@ -84,7 +88,7 @@ sub isformat{
     }
 }
 
-sub showFile{
+sub showInfo{
 #列出檔案資訊
     my ($self, $key, $datetime, $contents, $fname) = @_;
     print "key:$key <br>";

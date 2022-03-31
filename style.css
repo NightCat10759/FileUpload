@@ -46,31 +46,25 @@ main > div{
     display: inline-block;
 }
 
-.col_upload > span {
-    display: inline-block;
-    justify-content: center;
-    margin-bottom: 10px;
+.col_upload  {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
 }
 
-.upload > input{
-    padding-right: 0;
-    margin-right: 0;
+.col_search > span{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
 }
 
 .upload__logo > button{
-    cursor: pointer;
-    height: 0vw;
-    width: 0vw;
     background-color: white;
-    border: 0;
-}
-
-.search__logo > button{
     cursor: pointer;
-    height: 0vw;
-    width: 0vw;
-    background-color: white;
+    display: flex;
     border: 0;
+    justify-content: flex-start;
 }
 
 

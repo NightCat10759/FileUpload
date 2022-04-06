@@ -53,70 +53,61 @@ unless (($keyword eq '') || ($date eq '')){
 sub getContentId{
      #get
      my ($keyword,$sth) = @_;
+     my @arr = ();
+
      ##while
-     if(my $ref = $sth->fetchrow_hashref()){
+     while(my $ref = $sth->fetchrow_hashref()){
           my $id = $ref->{id};
           my $date = $ref->{date};
           my $content =  $ref->{content};
           # 如果包含關鍵字印出
           if ( $content =~ /$keyword/ ){
-               $content =~ s/{ }//;
-               my $res = JSON -> new -> utf8 -> pretty(1);
-               my $json = $res -> encode({
+
+              push @arr, {
                     content => $content,
                     date => $date,
                     id => $id
-               });
-   #            my $result = $result + $json;
-               print $json;
+               } ;
           }
     #      return $result;
      }
+
+     # 轉換成JSON輸出
+     my $res = JSON -> new -> utf8 -> pretty(1);
+     my $json_text = to_json \@arr, {ascii => 1, pretty => 1};
+     
+     print $json_text;
 
 }
 
 sub getContents{
      #gets
      my ($sth) = @_;
-     ##while
-     if (my $ref = $sth->fetchrow_hashref()){
+     my @arr = ();
+
+     while (my $ref = $sth->fetchrow_hashref()){
           my $id = $ref->{id};
           my $date = $ref->{date};
           my $content =  $ref->{content};
 
-          my $res = JSON -> new -> utf8 -> pretty(1);
-          my $json = $res -> encode({
+          # 將hash放入array
+          push @arr, {
                content => $content,
                date => $date,
                id => $id
-          });
-          print $json;
-#          &printout($id, $date, $content);
+          } ;
+
      }
+
+     # 轉換成JSON輸出
+     my $res = JSON -> new -> utf8 -> pretty(1);
+     my $json_text = to_json \@arr, {ascii => 1, pretty => 1};
+
+     print $json_text;
 
 }
 
-#sub printout{
-#     my($id, $date, $content) = @_;
-#     # 如果內容有特殊字元 做轉換
-#     $content =~ s/{ }//;
-#     print "<div class='container'>";
-#     print "<form class='content__form' action='./cgi-bin/editFile.pl'method='GET' enctype='multipart/form-data'>";
-#     print "     <span class='contents__No'><h3>$id</h3></span>";
-#     print "     <span class='contents__date'><h3>$date</h3></span>";
-#     print "     <span class='contents__content'>";
-#     print               $cgi->textfield(-name => 'editContent' ,-default => $content);
-#     #<input name='editContent' value='$content' />
-#     print "     </span>";
-#     print "     <span class='contents__move'>";                    
-#     print "        <button  class='contents__but__edit' name='edit'  value='$id'>修改</button>";
-#     print "        <button  class='contents__but__dele' name='delete' value='$id'>刪除</button>";
-#     print "     </span>";
-#     print "</form>";
-##     &footer();
-#     print "</div>";
-#}
-#
+
 #sub footer{
 #     print "<div class='footer'>";
 #     print "</div'>";

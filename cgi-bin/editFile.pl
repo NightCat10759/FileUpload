@@ -18,10 +18,15 @@ binmode(STDIN,':encoding(utf8)');
 binmode(STDOUT,':encoding(utf8)');
 binmode(STDERR,':encoding(utf8)');
 
+
+
 ### 顯示test資料
 my $cgi = CGI->new;
 my $db = Db->new;
 my %input = HandleForm->GetFormInput();
+
+### 處理json資料
+
 
 if ( %input && (my $id = $input{'delete'}) ) {
 # 刪除指定的id

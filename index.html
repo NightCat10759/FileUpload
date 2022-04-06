@@ -1,0 +1,70 @@
+
+ <!DOCTYPE html>
+ <html lang='en'>
+ <head>
+     <meta charset='UTF-8'>
+     <meta http-equiv='Content-Type' content='text/html'>
+     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+     <link rel='stylesheet' href='style.css?v=<?=time()?>'>
+     <title>file_upload</title>
+     <script src='https://code.jquery.com/jquery-3.6.0.js' integrity='sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=' crossorigin='anonymous'></script>
+     <script src='./js/jq-load.js'></script>
+ </head>
+ <body>
+     <main>
+         <form action='./cgi-bin/upload.cgi' method='post' enctype='multipart/form-data'>
+             <div class='col_upload'>
+                 <span class='upload'><input class='upload__input' type='file' accept='.txt' name='uploadfile' /></span>
+                 <span class='upload'><button class='upload__but' type='submit'><img src='./img/upload.webp' alt=''></button></span>
+             </div>
+         </form>
+         <form action='./' method='GET' enctype='multipart/form-data'>
+             <div class='col_search'>
+                 <span class='keyword'><input type='text' id='keyword' name='keyword' placeholder='關鍵字' /></span>
+                 <span class='date'><input class='date__input' type='datetime-local' name='date' placeholder='日期' /></span>
+                 <span class='search'><button class='search__but'><img src='./img/search.png' alt=''></i></button></span>
+             </div>
+         </form>
+             <div class='col_title'>
+                 <span class='title__No'><h3>No</h3></span>
+                 <span class='title__date'><h3>日期時間</h3></span>
+                 <span class='title__content'><h3>內容</h3></span>
+                 <span class='title__move'><h3>動作</h3></span>
+             </div> 
+          <section>
+             <div class='contents'>
+                <div class='container'>
+                      <label for=""><h1 style="color: black;">內容</h1></label>                  
+                </div>
+             </div> 
+          </section>
+ </div>
+ </body>
+ </html>
+
+ <script>
+    $(document).ready(function() {
+
+        $('button').on('click', function(e) {                 
+            e.preventDefault()  // 阻止鏈接跳轉
+            var url = this.href  // 保存點擊的地址                    
+
+            $('.container').remove()                          
+            $('.contents').load(url + ' .container').fadeIn('slow') // 載入新內容,url地址與該地址下的選擇器之間要有空格,表示該url下的#container
+        })
+        
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

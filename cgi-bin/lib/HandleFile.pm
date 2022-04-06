@@ -83,7 +83,7 @@ sub parseFile
 sub isformat{
     my($self, $key) = @_;
 #查看key值是否為[maillog]
-    if($key =~ "maillog"){
+    if($key =~ /^["maillog"]/){
         return "true";
     } else{
         return 0;

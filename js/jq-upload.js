@@ -1,23 +1,29 @@
 $(document).ready(function() {
 
+
     $(".upload__but").click(function(){
-        let formData = new FormData($(".upload__form")[0]);
-    //    alert("keyword:" + keyword);
-    //    alert("date:" + date);
+        alert("okay")
+        let form = new FormData();
+        let file_data = $('.upload__input').prop('files')[0];
+        alert(file_data);
+        form.append("file", file_data);
+
+
+
         $.ajax({
                 type: 'POST',
-                contentType: false,
                 async: false,
                 cache: false,
+                contentType: false,
                 processData: false,
                 url: './cgi-bin/upload.cgi',
-                datatype : "json",
-                data: formData,
+                data: form,
                 success: function(res) {
-                    alert("FILE loading SUCCESSFUL! ")
+                    alert("FILE loading SUCCESSFUL! :" + res.filename)
+                    
                 },
                 error: function(e) {
-                    alert("FILE loading Failed")
+                    alert("FILE loading Failed:" + e)
 //                    alert("Data length: " + e.length)
 //                    alert("This is your content: " + e.content);
 //                    alert("This is your date: " + e.date);

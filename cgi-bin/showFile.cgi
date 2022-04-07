@@ -61,6 +61,7 @@ sub getContentId{
           my $date = $ref->{date};
           my $content =  $ref->{content};
           # 如果包含關鍵字印出
+          # 加上上箭頭跟錢字
           if ( $content =~ /$keyword/ ){
 
               push @arr, {

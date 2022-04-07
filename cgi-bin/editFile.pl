@@ -54,20 +54,3 @@ unless ($edit_ID eq '') {
     print $json;
 }
 
-
-### 處理json資料
-
-
-#if ( %input && (my $id = $input{'delete'}) ) {
-# 刪除指定的id
-    #($self, $id)
-#    $db->deleteDb($id);
-#}
-#
-#if ( %input && (my $id = $input{'edit'}) ){
-## 編輯內容，將輸入內容替換原先內容
-#    #(content, id)
-#    my $editContent = $input{'editContent'};
-#    $db->editDb($editContent, $id);
-#    print $cgi->redirect('../index.cgi');
-#}

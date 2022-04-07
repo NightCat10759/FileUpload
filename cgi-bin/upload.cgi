@@ -11,16 +11,30 @@ use File::Basename;
 use File::Slurp;
 use JSON;
 
+
+
 # init Object
 my $query = new CGI;
 my $handlefile = new HandleFile();
 my $db = new Db();
 
+
 $CGI::POST_MAX = 1024 * 5000;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "../files";
+my $filename = $query->param("file");
 
-my $filename = $query->param("uploadfile");
+
+
+print $cgi->header('application/json;charset=UTF-8');
+my $res = JSON -> new -> utf8 -> pretty(1);
+ my $json = $res -> encode({
+        filename => $filename,
+    #    edit => $edit_ID,
+    });
+print $json;
+
+
 
 if ( !$filename )
 {
@@ -36,15 +50,15 @@ $filename =~ s/[^$safe_filename_characters]//g;
 
 if ( $filename =~ /^([$safe_filename_characters]+)$/ )
 {
-$filename = $1;
+    $filename = $1;
 }
 else
 {
-die "Filename contains invalid characters";
-exit;
+    die "Filename contains invalid characters";
+    exit;
 }
 
-my $upload_filehandle = $query->upload("uploadfile");
+my $upload_filehandle = $query->upload("file");
 
 open ( UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
 binmode UPLOADFILE;

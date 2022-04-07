@@ -22,24 +22,21 @@ my $db = new Db();
 $CGI::POST_MAX = 1024 * 5000;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "../files";
-my $filename = $query->param("file");
+my $filename = $query->param("filename");
 
-
-
-print $cgi->header('application/json;charset=UTF-8');
+print $query->header('application/json;charset=UTF-8');
 my $res = JSON -> new -> utf8 -> pretty(1);
- my $json = $res -> encode({
-        filename => $filename,
-    #    edit => $edit_ID,
-    });
-print $json;
+my $json = $res -> encode({
+    filename => $filename
+});
 
+print $json;
 
 
 if ( !$filename )
 {
-print $query->header ();
-die "There was a problem uploading your file (try a smaller file).";
+print $query->header('');
+die "There was a problem uploading your file (try a smaller file). file: fre${filename}few";
 exit;
 }
 
@@ -54,7 +51,7 @@ if ( $filename =~ /^([$safe_filename_characters]+)$/ )
 }
 else
 {
-    die "Filename contains invalid characters";
+    print "Filename contains invalid characters";
     exit;
 }
 
@@ -65,7 +62,7 @@ binmode UPLOADFILE;
 
 while ( <$upload_filehandle> )
 {
-print UPLOADFILE;
+    print UPLOADFILE;
 }
 
 close UPLOADFILE;
@@ -96,5 +93,3 @@ sub Main{
     }
  
 }
-
-print $query->redirect('../index.cgi');

@@ -39,7 +39,7 @@ sub getDb{
        return $self->{db};
 }
 
-sub showDbs{
+sub gets{
        my ($self) = @_;
        my $dbh = $self->{db};
        if ( ! $dbh->ping ) {
@@ -51,14 +51,23 @@ sub showDbs{
        return ($dbh, $sth);  
 }
 
-sub showDb{
+sub get{
        # 輸入關鍵字跟日期查詢資料
        my ($self,$date,$keyword) = @_;
        my $dbh = $self->{db};
+       my $sth;
        if ( ! $dbh->ping ) {
               $dbh = $dbh->clone() or die "cannot connect to db";
        }
-       my $sth = $dbh->prepare("SELECT * FROM file where date = ? || content = ? ORDER BY date DESC;");   # 待處理SQL句子q
+
+       unless ( ($date eq '') && ( $keyword eq '') ) {
+              $sth = $dbh->prepare("SELECT * FROM file where date = ? || content = ? ORDER BY date DESC;") or die "cannot connect to db";   # 待處理SQL句子q
+       } elsif ( !($date eq '') && ( $keyword eq '') ) {
+              $sth = $dbh->prepare("SELECT * FROM file where date = ?  ORDER BY date DESC;") or die "cannot connect to db";   # 待處理SQL句子q
+       } elsif ( ($date eq '') && !( $keyword eq '') ) {
+              $sth = $dbh->prepare("SELECT * FROM file where content = ? ORDER BY date DESC;") or die "cannot connect to db";   # 待處理SQL句子q
+       }
+
        $sth->execute($date,$keyword);    # 執行SQL
 
        return ($dbh, $sth);  

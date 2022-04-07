@@ -30,21 +30,21 @@ my $date = $cgi->param('date');
 
 
 # 輸入不為空值
-unless (($keyword eq '') || ($date eq '')){
+unless ( ($keyword eq '') && ($date eq '') ){
 
      ($date ,my $time) = split('T',$date,2);
      $time = $time . ":00";
      my $datetime = $date ." ". $time;
 
      # 輸入關鍵字跟日期查詢資料
-     my ($dbh, $sth) = $db->showDb($datetime, $keyword);
+     my ($dbh, $sth) = $db->get($datetime, $keyword);
      &getContentId($keyword, $sth);
      $sth->finish();
      $dbh->disconnect();
 
 } else {
 # 頁尾
-     my ($dbh, $sth) = $db->showDbs();
+     my ($dbh, $sth) = $db->gets();
      &getContents($sth);
      $sth->finish();
      $dbh->disconnect();

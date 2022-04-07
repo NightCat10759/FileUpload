@@ -40,7 +40,9 @@ $(document).ready(function() {
 
                 error: function(e) {
 
-                    alert("FILE loading Failed:" + e)
+                    alert("FILE loading GOT something wrong:" + e)
+
+                    $(".search__but").get(0).click();
 
                 }
 

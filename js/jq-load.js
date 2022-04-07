@@ -64,8 +64,7 @@ $(document).ready(function() {
     function addScript() {
         var el = document.querySelector('.contents');
         $(el).append (`
-            <script src='./js/jq-edit.js'></script>
-        
+                <script src='./js/jq-edit.js'></script>
             `)
     }
 

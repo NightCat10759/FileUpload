@@ -5,7 +5,7 @@ $(document).ready(function() {
         let ID = this.value;
         let editContent = document.querySelector(`#editContent${ID}`).value;
         //alert("ID:" + ID);
-        alert("content:" + editContent);
+        //alert("content:" + editContent);
 
         $.ajax({
                 type: 'POST',
@@ -14,8 +14,8 @@ $(document).ready(function() {
                 data: { 'edit': ID ,
                         'content': editContent},
                 success: function(res) {
-                    alert("EDIT SUCCESSFUL! " + res.edit_ID)
-                    alert("ADDED content: " + res.editContent)
+                    //alert("EDIT SUCCESSFUL! " + res.edit_ID)
+                    //alert("ADDED content: " + res.editContent)
 
                     $(".search__but").get(0).click();
                 },

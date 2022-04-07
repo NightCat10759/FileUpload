@@ -47,7 +47,7 @@ $(document).ready(function() {
                 <span class='contents__No'><h3> ${id} </h3></span>
                 <span class='contents__date'><h3> ${date} </h3></span>
                 <span class='contents__content'>
-                    <input type='text' name = 'editContent${id}' value= "${content}" />
+                    <input type='text' id = 'editContent${id}' name = 'editContent' value= "${content}" />
                 </span>
                 <span class='contents__move'>               
                     <button class='contents__but__edit' name='edit'  value= ${id}>修改</button>

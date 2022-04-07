@@ -38,13 +38,14 @@ unless ($delete_ID eq '') {
 
     my $json = $res -> encode({
         delete_ID => $delete_ID,
-        content => $editContent
     #    edit => $edit_ID,
     });
     print $json;
 }
 
 unless ($edit_ID eq '') {
+
+    $db->editDb($editContent, $edit_ID);
 
     my $json = $res -> encode({
         edit_ID => $edit_ID,
@@ -70,4 +71,3 @@ unless ($edit_ID eq '') {
 #    $db->editDb($editContent, $id);
 #    print $cgi->redirect('../index.cgi');
 #}
-#

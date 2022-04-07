@@ -3,7 +3,7 @@ $(document).ready(function() {
     
     $(".contents__but__edit").click(function(){
         let ID = this.value;
-        let editContent = document.querySelector(`editContent${ID}`).value;
+        let editContent = document.querySelector(`#editContent${ID}`).value;
         //alert("ID:" + ID);
         alert("content:" + editContent);
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
                 type: 'POST',
                 url: './cgi-bin/editFile.pl',
                 datatype : "json",
-                data: { 'ID': ID ,
+                data: { 'edit': ID ,
                         'content': editContent},
                 success: function(res) {
                     alert("EDIT SUCCESSFUL! " + res.edit_ID)

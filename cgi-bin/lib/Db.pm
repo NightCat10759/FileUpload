@@ -60,6 +60,7 @@ sub get{
               $dbh = $dbh->clone() or die "cannot connect to db";
        }
 
+
        unless ( ($date eq '') && ( $keyword eq '') ) {
               $sth = $dbh->prepare("SELECT * FROM file where date = ? || content = ? ORDER BY date DESC;") or die "cannot connect to db";   # 待處理SQL句子q
        } elsif ( !($date eq '') && ( $keyword eq '') ) {
@@ -67,7 +68,6 @@ sub get{
        } elsif ( ($date eq '') && !( $keyword eq '') ) {
               $sth = $dbh->prepare("SELECT * FROM file where content = ? ORDER BY date DESC;") or die "cannot connect to db";   # 待處理SQL句子q
        }
-
        $sth->execute($date,$keyword);    # 執行SQL
 
        return ($dbh, $sth);  

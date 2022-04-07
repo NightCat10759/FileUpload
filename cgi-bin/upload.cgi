@@ -21,6 +21,7 @@ my $db = new Db();
 
 $CGI::POST_MAX = 1024 * 5000;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
+my $safe_content_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "../files";
 my $filename = $query->param("filename");
 
@@ -69,27 +70,46 @@ close UPLOADFILE;
 
 #打開file 進行parse
 my $files = "../files/$filename";
-#print $query->header();
 &Main($files);
 
 sub Main{
+
     my ($files)= @_;
-#    print "<br />" . $files;
+
     $handlefile->setFile($files);
+
     my $contents = read_file($files);
+
     # parse
     my ($key,$datetime,$content) = $handlefile->parseFile($contents);
-    #$handlefile->showInfo($key, $datetime, $content, $filename);
+
+    # 檢查內容是否有特殊字元
+    $content =~ tr/ /_/;
+    $content =~ s/[^$safe_content_characters]//g;
+
+    if ( $content =~ /^([$safe_content_characters]+)$/ )
+    {
+        $content = $1;
+        $content =~ tr/_/ /;
+    }
+    else
+    {
+        print "file content contains invalid characters";
+        exit;
+    }
+
     # 找出有maillog的部分 
     if ($handlefile->isformat($key)){
+
         #有就存入db
-    #    $handlefile->showInfo($key, $datetime, $content, $filename);
         $db->insertDb($datetime,$content,$filename);
+
     } else {
+
         #沒有就刪除
-    #    print "file insert failed";
         my $file = $handlefile->getFile($files);
         $handlefile->deleteFile($file);
+
     }
  
 }

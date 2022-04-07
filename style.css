@@ -167,12 +167,23 @@ section > p{
     color: black;
 }
 
-.contents__content> input{
+.contents__content > *{
     width: 28.5vw;
+    height: 10vw;
     border-radius: 0;
     border: none;
     background-color: rgba(0, 132, 255, 0);
     color: black;
+}
+
+.contents__content > input[type="text" i]{
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-wrap: normal;
 }
 
 .contents__move {

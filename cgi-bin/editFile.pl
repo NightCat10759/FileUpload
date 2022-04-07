@@ -4,7 +4,6 @@
 use utf8;
 use Encode;
 use lib 'lib';
-use HandleForm;
 use File::Spec;
 use strict;
 use CGI;
@@ -28,6 +27,26 @@ my $db = Db->new;
 my $delete_ID = $cgi->param('delete');   
 my $edit_ID = $cgi->param('edit');    
 my $editContent = $cgi->param('content'); 
+
+### 過濾edit content 特殊字元
+my $safe_filename_characters = "a-zA-Z0-9_.-";
+
+if ($editContent){
+    $editContent =~ tr/ /_/;
+    $editContent =~ s/[^$safe_filename_characters]//g;
+
+    if ( $editContent =~ /^([$safe_filename_characters]+)$/ )
+    {
+        $editContent = $1;
+        $editContent =~ tr/_/ /;
+    }
+    else
+    {
+        print "File content contains invalid characters";
+        exit;
+    }
+}
+
 
 print $cgi->header('application/json;charset=UTF-8');
 my $res = JSON -> new -> utf8 -> pretty(1);

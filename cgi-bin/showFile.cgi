@@ -4,7 +4,6 @@
 use utf8;
 use Encode;
 use lib 'lib';
-use HandleForm;
 use File::Spec;
 use strict;
 use CGI;
@@ -27,16 +26,31 @@ print $cgi->header('application/json;charset=UTF-8');
 my $keyword = $cgi->param('keyword');    
 my $date = $cgi->param('date');
 
-
+# 整理date格式
+($date ,my $time) = split('T',$date,2);
+$time = $time . ":00";
+my $datetime = $date ." ". $time;
 
 # 輸入不為空值
-unless ( ($keyword eq '') && ($date eq '') ){
-
-     ($date ,my $time) = split('T',$date,2);
-     $time = $time . ":00";
-     my $datetime = $date ." ". $time;
+unless ( ($keyword eq '') || ($date eq '') ){
 
      # 輸入關鍵字跟日期查詢資料
+     my ($dbh, $sth) = $db->get($datetime, $keyword);
+     &getContentId($keyword, $sth);
+     $sth->finish();
+     $dbh->disconnect();
+
+} elsif ( !($keyword eq '') ) {
+
+     # 輸入關鍵字查詢資料
+     my ($dbh, $sth) = $db->gets();
+     &getContentId($keyword, $sth);
+     $sth->finish();
+     $dbh->disconnect();
+
+} elsif ( !($date eq '') ){
+
+     # 輸入日期查詢資料
      my ($dbh, $sth) = $db->get($datetime, $keyword);
      &getContentId($keyword, $sth);
      $sth->finish();

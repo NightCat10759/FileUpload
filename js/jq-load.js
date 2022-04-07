@@ -3,8 +3,9 @@ $(document).ready(function() {
     $(".search__but").click(function(){
         let keyword = document.querySelector("#keyword").value;
         let date = document.querySelector(".date__input").value;
-    //    alert("keyword:" + keyword);
-    //    alert("date:" + date);
+        //alert("keyword:" + keyword);
+        //alert("date:" + date);
+
         $.ajax({
                 type: 'POST',
                 url: './cgi-bin/showFile.cgi',
@@ -12,14 +13,14 @@ $(document).ready(function() {
                 data: { 'keyword': keyword,
                         'date': date},
                 success: function(res) {
+                    //alert("DATA loading SUCCESS!")
                     for (let index = 0; index < res.length; index++) {
 //                        alert("Data length: " + res.length)
 //                        alert("This is your content: " + res[index].content);
 //                        alert("This is your date: " + res[index].date);
 //                        alert("This is your id: " + res[index].id);
     
-                        addElement( index, res[index].content, res[index].date, res[index].id );
-
+                        addElement( res[index].content, res[index].date, res[index].id );
                     }
                     addScript()
                 },
@@ -35,9 +36,9 @@ $(document).ready(function() {
     });
 
 
-    function addElement(index, content , date , id) {
+    function addElement( content , date , id) {
         // 把後端資料顯示在前端
-    //    alert('更新')               
+        //alert('更新')               
 
         var el = document.querySelector('.contents');
         $(el).append ( `
@@ -64,19 +65,8 @@ $(document).ready(function() {
         var el = document.querySelector('.contents');
         $(el).append (`
             <script src='./js/jq-edit.js'></script>
-            <script>
-                $(document).ready(function() {
-
-                    $('button').on('click', function(e) {                 
-                        e.preventDefault()  // 阻止鏈接跳轉
-                        var url = this.href  // 保存點擊的地址                    
-
-                        $('.contents').load(url + ' .container').fadeIn('slow') // 載入新內容,url地址與該地址下的選擇器之間要有空格,表示該url下的#container
-                    })
-                    
-                })
-            </script>
-        `)
+        
+            `)
     }
 
 });

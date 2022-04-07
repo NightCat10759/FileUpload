@@ -27,24 +27,40 @@ my $db = Db->new;
 
 my $delete_ID = $cgi->param('delete');   
 my $edit_ID = $cgi->param('edit');    
-
+my $editContent = $cgi->param('content'); 
 
 print $cgi->header('application/json;charset=UTF-8');
 my $res = JSON -> new -> utf8 -> pretty(1);
-my $json = $res -> encode({
-    delete => $delete_ID,
-#    edit => $edit_ID,
-});
 
-print $json;
+unless ($delete_ID eq '') {
+
+    $db->deleteDb($delete_ID);
+
+    my $json = $res -> encode({
+        delete_ID => $delete_ID,
+        content => $editContent
+    #    edit => $edit_ID,
+    });
+    print $json;
+}
+
+unless ($edit_ID eq '') {
+
+    my $json = $res -> encode({
+        edit_ID => $edit_ID,
+        content => $editContent
+    });
+    print $json;
+}
+
+
 ### 處理json資料
 
 
 #if ( %input && (my $id = $input{'delete'}) ) {
-## 刪除指定的id
-#    #($self, $id)
+# 刪除指定的id
+    #($self, $id)
 #    $db->deleteDb($id);
-#    print $cgi->redirect('../index.cgi');
 #}
 #
 #if ( %input && (my $id = $input{'edit'}) ){

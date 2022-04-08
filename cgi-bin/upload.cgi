@@ -23,8 +23,8 @@ $CGI::POST_MAX = 1024 * 5000;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
 my $safe_content_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "../files";
-#my $filename = $query->param("filename");
-my $filename = "data01.txt";
+my $filename = $query->param("filename");
+#my $filename = "../test-file/data02.txt";
 
 
 if ( !$filename )
@@ -49,17 +49,17 @@ else
     exit;
 }
 
-#my $upload_filehandle = $query->upload("file");
-#
-#open ( UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
-#binmode UPLOADFILE;
-#
-#while ( <$upload_filehandle> )
-#{
-#    print UPLOADFILE;
-#}
-#
-#close UPLOADFILE;
+my $upload_filehandle = $query->upload("file");
+
+open ( UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
+binmode UPLOADFILE;
+
+while ( <$upload_filehandle> )
+{
+    print UPLOADFILE;
+}
+
+close UPLOADFILE;
 
 #打開file 進行parse
 my $files = "../files/$filename";
@@ -77,8 +77,7 @@ sub Main{
     my ($files)= @_;
 
     # 將檔案存入物件
-    $handlefile->setFile("../files/data01.txt");
-#    $handlefile->setFile($files);
+    $handlefile->setFile($files);
 
 
     # 讀取檔案進行處理
@@ -86,13 +85,13 @@ sub Main{
     # read line by line
     my ($contents , $last_line) = &read_input_File();
 
-#    print $query->header('application/json;charset=UTF-8');
-#    my $res = JSON -> new -> utf8 -> pretty(1);
-#    my $json = $res -> encode({
-#        filename => $filename
-#    });
-#
-#    print $json;
+    print $query->header('application/json;charset=UTF-8');
+    my $res = JSON -> new -> utf8 -> pretty(1);
+    my $json = $res -> encode({
+        filename => $filename
+    });
+
+    print $json;
 
 }
 
@@ -131,11 +130,9 @@ sub read_input_File
                 $db->insertDb($datetime,$content,$filename);
 
             } else {
+
                 print "key:$key is wrong\n";
-                #沒有就刪除
-                exit
-#                my $file = $handlefile->getFile($files);
-#                $handlefile->deleteFile($file);
+                #沒有就print出錯誤訊息
 
             }
 

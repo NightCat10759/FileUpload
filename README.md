@@ -26,9 +26,8 @@
 
 * Upload txt file:
 
-  only can Upload txt file, and parse line by line with keyword "maillog".
-  
-  next,it will save the contents and filename and datetime into database.
+  * it's only can Upload txt file, and parse line by line with keyword "maillog" in the txt files.
+  * it will save the contents and filename and datetime into database.
   
 
 * Search txt file:

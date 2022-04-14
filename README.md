@@ -48,7 +48,7 @@
 
 ## How-to-run-this-app
 
-  clone this app to **xampp htdocs** directory , and setup Database
+  clone this app to **xampp htdocs** directory , and **setup Database**.
   
 ## Database
 * DB name:

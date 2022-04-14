@@ -4,9 +4,9 @@
   FileUpload is a web app to managed txt file with certain format contents.
   execute CRUD function to search or change the contents of the information in the database.
 
-## Content-List
+## Features
 * [File-format](#file-format)
-* [Features](#features)
+* [Content](#content)
 * [How-to-run-this-app](#how-to-run-this-app)
 * [Database](#database)
 
@@ -22,7 +22,7 @@
 .
 ```
 
-## Features
+## Content
 
 * Upload txt file:
 

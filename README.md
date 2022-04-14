@@ -1,7 +1,7 @@
 # FileUpload
   FileUpload made by perl & javascript , purpose to practice practical perl and jquery ajax used.
   
-  FileUpload is a app to managed txt file with certain format contents.
+  FileUpload is a web app to managed txt file with certain format contents.
   execute CRUD function to search or change the contents of the information in the database.
 
 ## Content-List
